@@ -22,8 +22,6 @@ my_greeting = %q(
 puts my_greeting
 
 
-
-
 def show_fridges
 fridges = Fridge.all
 
@@ -58,24 +56,29 @@ end
 
 
 
-def show_items_in_fridge
-    fridges = Fridge.all
-    fridges.each do |fridge|
-        puts "In this #{fridge.brand} we have...#{has_food} and #{has_drinks}"
+def show_foods_in_fridge
+    puts "Wanna open a fridge? Type in the fridge's name(it's a number) and hit enter"
+    show_fridges
+    fridge_opened = gets.chomp
+    list_of_food = Food.where("fridge_id = #{fridge_opened}")
+    list_of_food.each do |food|
+        puts "Here we gots #{food.name}. Yumm!"
     end
 end
 
 
-# def run_script
-# <<~HEREDOC
-#     Welcome to the fridge tracker
-#     What would you like to do? 
-#     1. Show all of your fridges 
-#     2. Add a fridge
-#     3. Delete a fridge
-#     4. View all food items in a specific fridge   
-# HEREDOC
-#     end
+def show_drinks_in_fridge
+    puts "Wanna open a fridge? Type in the fridge's name(it's a number) and hit enter"
+    show_fridges
+    fridge_opened = gets.chomp
+    list_of_drinks = Drink.where("fridge_id = #{fridge_opened}")
+    list_of_drinks.each do |drink|
+        puts "In this fridge, we gots #{drink.name}. Help yourself!"
+    end
+end
+
+
+
 
 
 
@@ -91,6 +94,30 @@ elsif user_input === 2
 elsif user_input === 3    
     delete_fridge
 elsif user_input === 4
-    show_items_in_fridge
+    show_foods_in_fridge
+elsif user_input === 7
+    show_drinks_in_fridge
 end
 
+
+
+
+
+
+
+
+
+
+
+
+
+# def run_script
+# <<~HEREDOC
+#     Welcome to the fridge tracker
+#     What would you like to do? 
+#     1. Show all of your fridges 
+#     2. Add a fridge
+#     3. Delete a fridge
+#     4. View all food items in a specific fridge   
+# HEREDOC
+#     end
