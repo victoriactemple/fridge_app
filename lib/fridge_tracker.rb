@@ -43,7 +43,7 @@ has_food = gets.chomp
 puts "Has drinks true of false?"
 has_drinks = gets.chomp
 
-new_fridge =  Fridge.create(location: location, brand: brand, size: size, has_foods: has_foods, has_drinks: has_drinks)
+new_fridge =  Fridge.create(location: location, brand: brand, size: size, has_food: has_food, has_drink: has_drink)
 puts new_fridge
 end
 
@@ -53,8 +53,6 @@ def delete_fridge
     fridge_to_delete = gets.chomp
     Fridge.find(fridge_to_delete).destroy
 end    
-
-
 
 def show_foods_in_fridge
     puts "Wanna open a fridge? Type in the fridge's name(it's a number) and hit enter."
@@ -79,10 +77,10 @@ def add_some_food
     food_name = gets.chomp
     puts "What's the food in pounds?"
     food_weight = gets.chomp.to_i
-    puts "Can you add the date please?"
-    date_added = gets.chomp
+    # puts "Can you add the date please?"
+    # date_added = gets.chomp
 
-    new_food = Food.create(name: :name, weight: :weight, date: :date).where("fridge_id = #{fridge_opened}")
+    new_food = Food.create(name: :name, weight: :weight).where("fridge_id = #{fridge_opened}")
 end
 
 
@@ -101,7 +99,7 @@ def add_some_drink
 
     puts "Which fridge do you want to add to? Type in the fridge's name(it's a number) and hit enter."
     show_fridges
-    fridge_opened = gets.chomp
+    fridge_to_add_to = gets.chomp.to_i
 
     puts "What drink you wanna add?"
     drink_name = gets.chomp
@@ -110,8 +108,9 @@ def add_some_drink
     puts "Is your drink an adult beverage? Type only 'true' or 'false'"
     drink_alcoholic = gets.chomp
      
-    new_drink = Drink.create(name: name, size: size, alcoholic: alcoholic)
-
+    # so these user inputs are saved to variables and used to build the new hash.
+    new_drink = Drink.create(name: drink_name, size: drink_size, alcoholic: drink_alcoholic, fridge_id: fridge_to_add_to)
+puts "You've added #{new_drink.name} to fridge #{fridge_to_add_to}."
 end
 
 
