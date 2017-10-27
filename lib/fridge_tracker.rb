@@ -57,7 +57,7 @@ end
 
 
 def show_foods_in_fridge
-    puts "Wanna open a fridge? Type in the fridge's name(it's a number) and hit enter"
+    puts "Wanna open a fridge? Type in the fridge's name(it's a number) and hit enter."
     show_fridges
     fridge_opened = gets.chomp
     list_of_food = Food.where("fridge_id = #{fridge_opened}")
@@ -65,6 +65,27 @@ def show_foods_in_fridge
         puts "Here we gots #{food.name}. Yumm!"
     end
 end
+
+
+
+def add_some_food
+    # puts "Add a food" 
+  
+    puts "Which fridge do you want to add to? Type in the fridge's name(it's a number) and hit enter."
+    show_fridges
+    fridge_opened = gets.chomp
+
+    puts "What food you wanna add?"
+    food_name = gets.chomp
+    puts "What's the food in pounds?"
+    food_weight = gets.chomp.to_i
+    puts "Can you add the date please?"
+    date_added = gets.chomp
+
+    new_food = Food.create(name: name, weight: weight, date: :date).where("fridge_id = #{fridge_opened}")
+end
+
+
 
 
 def show_drinks_in_fridge
@@ -95,6 +116,8 @@ elsif user_input === 3
     delete_fridge
 elsif user_input === 4
     show_foods_in_fridge
+elsif user_input === 5
+    add_some_food
 elsif user_input === 7
     show_drinks_in_fridge
 end
