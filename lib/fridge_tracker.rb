@@ -82,10 +82,8 @@ def add_some_food
     puts "Can you add the date please?"
     date_added = gets.chomp
 
-    new_food = Food.create(name: name, weight: weight, date: :date).where("fridge_id = #{fridge_opened}")
+    new_food = Food.create(name: :name, weight: :weight, date: :date).where("fridge_id = #{fridge_opened}")
 end
-
-
 
 
 def show_drinks_in_fridge
@@ -99,6 +97,22 @@ def show_drinks_in_fridge
 end
 
 
+def add_some_drink
+
+    puts "Which fridge do you want to add to? Type in the fridge's name(it's a number) and hit enter."
+    show_fridges
+    fridge_opened = gets.chomp
+
+    puts "What drink you wanna add?"
+    drink_name = gets.chomp
+    puts "What size is your drink in ounces?"
+    drink_size = gets.chomp.to_i
+    puts "Is your drink an adult beverage? Type only 'true' or 'false'"
+    drink_alcoholic = gets.chomp
+     
+    new_drink = Drink.create(name: name, size: size, alcoholic: alcoholic)
+
+end
 
 
 
@@ -120,6 +134,8 @@ elsif user_input === 5
     add_some_food
 elsif user_input === 7
     show_drinks_in_fridge
+elsif user_input === 8
+    add_some_drink
 end
 
 
